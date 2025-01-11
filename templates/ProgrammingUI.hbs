@@ -1,16 +1,28 @@
-<form>
+<form data-program-actor="{{actor.id}}">
     <ul>
-        <li>aaaaaaaaaa</li>
-        <li>aaaaaaaaaa</li>
-        <li>aaaaaaaaaa</li>
-        <li>aaaaaaaaaa</li>
+        {{#each programs}}
+        <li data-program-id="{{id}}">
+            <input type="text" name="{{id}}.arg1" value="{{arg1}}">
+            <select name="{{id}}.op" value="{{op}}">
+                <option value disabled selected>-- {{localize "ap.select"}}
+                    --</option>
+                <option value="option1">Option 1</option>
+                <option value="option2">Option 2</option>
+                <option value="option3">Option 3</option>
+            </select>
+            <input type="text" name="{{id}}.arg2" value="{{arg2}}">
+        </li>
+        {{/each}}
     </ul>
     <hr />
-    <div>
-        <button type="submit">
+    <div id="buttons">
+        <button type="button" data-action="create">
+            {{localize "ap.addNew"}}
+        </button>
+        <button type="submit" data-action="save">
             {{localize "ap.save"}}
         </button>
-        <button type="submit">
+        <button type="submit" data-action="cancel">
             {{localize "ap.cancel"}}
         </button>
     </div>

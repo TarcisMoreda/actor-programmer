@@ -1,4 +1,4 @@
-import { ProgrammingUI } from '../ui/ProgrammingUI'
+import { ProgrammingUI } from '../ui/programmingUI'
 
 export function registerProgramButton () {
     Hooks.on('renderActorSheet', (sheet, html, _css) => {
@@ -11,7 +11,7 @@ export function registerProgramButton () {
         `)
         button.click(() => {
             const programmer = new ProgrammingUI(ProgrammingUI.defaultOptions, sheet.actor)
-            programmer.render(true)
+            programmer.render(true, { actor: sheet.actor })
         })
 
         html.closest('.app').find('.program-sheet').remove()

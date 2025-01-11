@@ -1,7 +1,7 @@
 {
   "id": "actor-programmer",
   "title": "Actor Programmer",
-  "version": "1.0.0",
+  "version": "v1.0.0",
   "compatibility": {
     "minimum": "12",
     "verified": "12"

@@ -1,3 +1,4 @@
 export const MODULE = {
-    ID: 'actor-programmer'
+    ID: 'actor-programmer',
+    FLAG: 'programs'
 }

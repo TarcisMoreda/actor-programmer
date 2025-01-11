@@ -2,5 +2,7 @@
     "ap.program": "Programar",
     "ap.actor": "Ator",
     "ap.save": "Salvar",
-    "ap.cancel": "Cancelar"
+    "ap.cancel": "Cancelar",
+    "ap.addNew": "Adicionar Novo",
+    "ap.select": "Selecione uma operação"
 }
