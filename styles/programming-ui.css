@@ -1,0 +1,36 @@
+#form {
+    display: flex;
+    flex-direction: column;
+    height: 570px;
+}
+
+#program-list {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+    overflow-y: scroll;
+    gap: 8px;
+}
+
+.program-list-item {
+    display: flex;
+    gap: 8px;
+}
+
+#buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.transparent-button {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    align-self: center;
+    line-height: normal;
+    flex-grow: 0;
+    width: 25px;
+}

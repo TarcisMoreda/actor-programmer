@@ -5,7 +5,7 @@ export default class Programmer {
         return game.actors.get(actorId)?.getFlag(MODULE.ID, MODULE.FLAG)
     }
 
-    static createProgram (actorId, programData) {
+    static async createProgram (actorId, programData) {
         const newProgram = {
             id: foundry.utils.randomID(16),
             actorId,
@@ -14,25 +14,25 @@ export default class Programmer {
         const newPrograms = {
             [newProgram.id]: newProgram
         }
-        game.actors.get(actorId)?.setFlag(MODULE.ID, MODULE.FLAG, newPrograms)
+        await game.actors.get(actorId)?.setFlag(MODULE.ID, MODULE.FLAG, newPrograms)
     }
 
-    static updateProgram (actorId, programId, updateData) {
+    static async updateProgram (actorId, programId, updateData) {
         const update = {
             [programId]: updateData
         }
-        return game.actors.get(actorId)?.setFlag(MODULE.ID, MODULE.FLAG, update)
+        await game.actors.get(actorId)?.setFlag(MODULE.ID, MODULE.FLAG, update)
     }
 
-    static updateActorPrograms (actorId, expandedData) {
-        return game.actors.get(actorId)?.setFlag(MODULE.ID, MODULE.FLAG, expandedData)
+    static async updateActorPrograms (actorId, expandedData) {
+        await game.actors.get(actorId)?.setFlag(MODULE.ID, MODULE.FLAG, expandedData)
     }
 
-    static deleteProgram (actorId, programId) {
+    static async deleteProgram (actorId, programId) {
         const keyDeletion = {
             [`-=${programId}`]: null
         }
 
-        return game.actors.get(actorId)?.setFlag(MODULE.ID, MODULE.FLAG, keyDeletion)
+        await game.actors.get(actorId)?.setFlag(MODULE.ID, MODULE.FLAG, keyDeletion)
     }
 }

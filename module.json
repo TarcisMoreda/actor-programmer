@@ -9,6 +9,9 @@
   "esmodules": [
     "./scripts/actor-programmer.min.js"
   ],
+  "styles": [
+    "./styles/programming-ui.css"
+  ],
   "languages": [
     {
       "lang": "en",

@@ -1,16 +1,18 @@
-<form data-program-actor="{{actor.id}}">
-    <ul>
+<form data-program-actor="{{actor.id}}" id="form">
+    <ul id="program-list">
         {{#each programs}}
-        <li data-program-id="{{id}}">
+        <li data-program-id="{{id}}" class="program-list-item">
             <input type="text" name="{{id}}.arg1" value="{{arg1}}">
-            <select name="{{id}}.op" value="{{op}}">
-                <option value disabled selected>-- {{localize "ap.select"}}
-                    --</option>
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
+            <select name="{{id}}.op">
+                <option value="equal">==</option>
+                <option value="greater">></option>
+                <option value="gequal">>=</option>
+                <option value="less"><</option>
+                <option value="lequal"><=</option>
             </select>
             <input type="text" name="{{id}}.arg2" value="{{arg2}}">
+            <button class="transparent-button" data-action="program"><i class="fas fa-gears"></i></button>
+            <button class="transparent-button" data-action="delete"><i class="fas fa-trash"></i></button>
         </li>
         {{/each}}
     </ul>
@@ -19,11 +21,8 @@
         <button type="button" data-action="create">
             {{localize "ap.addNew"}}
         </button>
-        <button type="submit" data-action="save">
-            {{localize "ap.save"}}
-        </button>
-        <button type="submit" data-action="cancel">
-            {{localize "ap.cancel"}}
+        <button type="button" data-action="reset">
+            {{localize "ap.reset"}}
         </button>
     </div>
 </form>

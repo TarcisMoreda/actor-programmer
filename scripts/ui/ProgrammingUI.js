@@ -14,7 +14,8 @@ export class ProgrammingUI extends FormApplication {
         options.template = `modules/${MODULE.ID}/templates/programmingUI.hbs`
         options.classes = ['actor-programmer']
         options.id = 'actor-programmer'
-        options.width = 400
+        options.width = 600
+        options.height = 700
         options.closeOnSubmit = false
         options.submitOnChange = true
         return options
@@ -30,18 +31,17 @@ export class ProgrammingUI extends FormApplication {
     async _updateObject (_event, formData) {
         const expandedData = foundry.utils.expandObject(formData)
         await Programmer.updateActorPrograms(this.actor.id, expandedData)
-        this.render()
     }
 
     activateListeners (html) {
         super.activateListeners(html)
-        $(html).find('[data-action]').on('click', async (event) => { await this._handleButtonClick(event) })
+        html.on('click', '[data-action]', this._handleButtonClick.bind(this))
     }
 
     async _handleButtonClick (event) {
         const clickedElement = $(event.currentTarget)
         const action = clickedElement.data().action
-        const actorId = clickedElement.parents('[data-program-actor]')?.data()?.programActor
+        const actorId = this.actor.id
         const programId = clickedElement.parents('[data-program-id]')?.data()?.programId
 
         switch (action) {
@@ -50,12 +50,18 @@ export class ProgrammingUI extends FormApplication {
             this.render()
             break
 
-        case 'cancel':
-            const actorPrograms = Programmer.getProgramsForActor(actorId)
-            const keys = Object.keys(actorPrograms)
-            for (const key of keys) {
-                await Programmer.deleteProgram(actorId, key)
+        case 'reset':
+            {
+                const actorPrograms = Programmer.getProgramsForActor(actorId)
+                const keys = Object.keys(actorPrograms)
+                for (const key of keys) { await Programmer.deleteProgram(actorId, key) }
             }
+            this.render()
+            break
+
+        case 'delete':
+            await Programmer.deleteProgram(actorId, programId)
+            this.render()
             break
 
         default:
