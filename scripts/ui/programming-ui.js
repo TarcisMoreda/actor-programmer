@@ -1,5 +1,6 @@
 import { MODULE } from '../constants'
-import Programmer from '../programmer/programmer'
+import { Programmer } from '../programmer/programmer'
+import { EffectUI } from './effect-ui'
 
 export class ProgrammingUI extends FormApplication {
     constructor (options, actor) {
@@ -11,7 +12,7 @@ export class ProgrammingUI extends FormApplication {
     static get defaultOptions () {
         const options = super.defaultOptions
         options.title = `${game.i18n.format('ap.program')} ${game.i18n.format('ap.actor')}`
-        options.template = `modules/${MODULE.ID}/templates/programmingUI.hbs`
+        options.template = `modules/${MODULE.ID}/templates/programming-ui.hbs`
         options.classes = ['actor-programmer']
         options.id = 'actor-programmer'
         options.width = 600
@@ -36,6 +37,7 @@ export class ProgrammingUI extends FormApplication {
     activateListeners (html) {
         super.activateListeners(html)
         html.on('click', '[data-action]', this._handleButtonClick.bind(this))
+        html.on('change', '[data-value]', this._handleValueChange.bind(this))
     }
 
     async _handleButtonClick (event) {
@@ -46,7 +48,16 @@ export class ProgrammingUI extends FormApplication {
 
         switch (action) {
         case 'create':
-            await Programmer.createProgram(actorId, { arg1: '', arg2: '', op: 'equals', command: '' })
+            await Programmer.createProgram(actorId, {
+                arg1: '',
+                arg2: '',
+                op: 'equals',
+                command: '',
+                effect: {
+                    field: '',
+                    value: ''
+                }
+            })
             this.render()
             break
 
@@ -62,6 +73,32 @@ export class ProgrammingUI extends FormApplication {
         case 'delete':
             await Programmer.deleteProgram(actorId, programId)
             this.render()
+            break
+
+        case 'program':
+            {
+                const effectProgrammer = new EffectUI(EffectUI.defaultOptions, this.actor, programId)
+                effectProgrammer.render(true)
+            }
+            break
+
+        default:
+            break
+        }
+    }
+
+    async _handleValueChange (event) {
+        const clickedElement = $(event.currentTarget)
+        const action = clickedElement.data().value
+        const actorId = this.actor.id
+        const programId = clickedElement.parents('[data-program-id]')?.data()?.programId
+
+        switch (action) {
+        case 'select':
+            {
+                const newValue = { op: clickedElement.val() }
+                await Programmer.updateProgram(actorId, programId, newValue)
+            }
             break
 
         default:

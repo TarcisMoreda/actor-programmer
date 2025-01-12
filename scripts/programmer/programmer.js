@@ -1,6 +1,6 @@
 import { MODULE } from '../constants'
 
-export default class Programmer {
+export class Programmer {
     static getProgramsForActor (actorId) {
         return game.actors.get(actorId)?.getFlag(MODULE.ID, MODULE.FLAG)
     }
@@ -8,7 +8,6 @@ export default class Programmer {
     static async createProgram (actorId, programData) {
         const newProgram = {
             id: foundry.utils.randomID(16),
-            actorId,
             ...programData
         }
         const newPrograms = {
@@ -32,7 +31,6 @@ export default class Programmer {
         const keyDeletion = {
             [`-=${programId}`]: null
         }
-
         await game.actors.get(actorId)?.setFlag(MODULE.ID, MODULE.FLAG, keyDeletion)
     }
 }

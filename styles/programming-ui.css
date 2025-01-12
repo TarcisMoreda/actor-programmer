@@ -34,3 +34,18 @@
     flex-grow: 0;
     width: 25px;
 }
+
+hr {
+    width: 100%;
+}
+
+#programming-effect {
+    display: flex;
+    gap: 8px;
+    
+}
+
+.text {
+    align-self: center;
+    line-height: normal;
+}

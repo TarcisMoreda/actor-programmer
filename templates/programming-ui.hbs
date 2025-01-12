@@ -1,0 +1,36 @@
+<form data-program-actor="{{actor.id}}" id="form">
+    <ul id="program-list">
+        {{#each programs}}
+        <li data-program-id="{{id}}" class="program-list-item">
+            <input type="text" name="{{id}}.arg1" value="{{arg1}}">
+            <select name="{{id}}.op" value="{{op}}" data-value="select">
+                <option value=" " {{#if (eq op " ")}}selected{{/if}}> </option>
+                <option value="equal" {{#if (eq op
+                    "equal")}}selected{{/if}}>==</option>
+                <option value="greater" {{#if (eq op
+                    "greater")}}selected{{/if}}>></option>
+                <option value="gequal" {{#if (eq op
+                    "gequal")}}selected{{/if}}>>=</option>
+                <option value="less" {{#if (eq op
+                    "less")}}selected{{/if}}><</option>
+                <option value="lequal" {{#if (eq op
+                    "lequal")}}selected{{/if}}><=</option>
+            </select>
+            <input type="text" name="{{id}}.arg2" value="{{arg2}}">
+            <button class="transparent-button" data-action="program"><i
+                    class="fas fa-gears"></i></button>
+            <button class="transparent-button" data-action="delete"><i
+                    class="fas fa-trash"></i></button>
+        </li>
+        {{/each}}
+    </ul>
+    <hr />
+    <div id="buttons">
+        <button type="button" data-action="create">
+            {{localize "ap.addNew"}}
+        </button>
+        <button type="button" data-action="reset">
+            {{localize "ap.reset"}}
+        </button>
+    </div>
+</form>
